@@ -1,6 +1,7 @@
 # directories = `s3cmd ls #{ENV['AWS_S3_BUCKET_NAME']}`
-directories = %x(s3cmd ls #{ENV['AWS_S3_BUCKET_NAME']}).split.
+directories = %x(s3cmd ls #{ENV['AWS_S3_BUCKET_NAME']}).split
 directories.delete_if {|i| i == "DIR"}
+
 # directories = %x(echo )
 # directories = ""
 #puts "directories: #{directories}"
