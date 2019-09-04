@@ -4,5 +4,8 @@ puts "directories: #{directories}"
 outputs << {
     _collection: 'directories',
     _id: 'directories',
-    directories: directories
+    directories: directories,
+    bucket: ENV['AWS_S3_BUCKET_NAME'],
+    access_key: ENV['AWS_ACCESS_KEY_ID'],
+    access_key_echo: `echo $AWS_ACCESS_KEY_ID`
   }
