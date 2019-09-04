@@ -1,5 +1,6 @@
-directories = `s3cmd ls #{ENV['AWS_S3_BUCKET_NAME']}`
-puts "directories: #{directories}"
+#directories = `s3cmd ls #{ENV['AWS_S3_BUCKET_NAME']}`
+directories = ""
+#puts "directories: #{directories}"
 
 outputs << {
     _collection: 'directories',
