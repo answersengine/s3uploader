@@ -5,12 +5,16 @@ require 'answersengine'
 s3cmd = RubyS3Cmd::S3Cmd.new
 listings = s3cmd.ls(ENV['AWS_S3_TARGET_DIRECTORY'])
 
+puts "starting s3 uploader script"
+
 dir_names = []
 
 listings.each do |dir|
   file_name = dir.split.last
   dir_names << file_name
 end
+
+puts "dir names on s3: #{dir_names.join(', ')}"
 
 # get list of SCRAPERS_TO_EXPORT
 scrapers = ENV['SCRAPERS_TO_EXPORT'].split(',').map(&:strip)
@@ -51,7 +55,9 @@ scrapers.each do |scraper_name|
     target_directory = File.join(ENV['AWS_S3_TARGET_DIRECTORY'],
       "#{Date.parse(export['created_at']).to_s}-#{scraper_name}", export['file_name'])
     
+    puts "Uploading ./to_upload/#{export['file_name']} to #{target_directory}"
     s3cmd.put("./to_upload/#{export['file_name']}", target_directory)
+    puts "success"
 
     outputs << {
       _collection: 'uploaded',
